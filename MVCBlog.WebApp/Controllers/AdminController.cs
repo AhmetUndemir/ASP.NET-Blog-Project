@@ -19,5 +19,23 @@ namespace MVCBlog.WebApp.Controllers
 			return View();
 
 		}
-    }
+
+		[HttpPost]
+		public ActionResult Login(string username, string pass)
+		{
+
+			if (username == "admin" && pass == "123")
+			{
+				Session["Username"] = username;
+
+				return RedirectToAction("Index", "Home");
+			}
+			else
+			{
+				ViewBag.Error = "Kullanıcı adı veya şifre hatalı";
+				return View();
+			}
+
+		}
+	}
 }
