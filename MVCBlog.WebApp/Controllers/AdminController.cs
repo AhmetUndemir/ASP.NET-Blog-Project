@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCBlog.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,42 @@ namespace MVCBlog.WebApp.Controllers
 
 		}
 
+		public ActionResult AdminAdd()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult AdminAdd(string name, string username, string password, int status)
+		{
+			using BlogDBContext ctx = new BlogDBContext())
+			{
+				tblAdmins adminInfo = new tblAdmins();
+
+				tblAdmins isAdmin = ctx.tblAdmins.Where(u => u.username == username).FirstOrDefault();
+
+				if (isAdmin == null)
+				{
+					adminInfo.id = status;
+					adminInfo.name = name;
+					adminInfo.username = username;
+					adminInfo.password = password;
+					adminInfo.statusId = status;
+
+					ctx.tblAdmins.Add(adminInfo);
+					ctx.SaveChanges();
+
+					ViewBag.Success = "Kayıt işlemi başarılı. :)";
+				}
+				else
+				{
+					ViewBag.Error = "Kullanıcı daha önce oluşturulmuş.";
+				}
+			}
+
+			return View();
+		}
+
 		[HttpPost]
 		public ActionResult Login(string username, string pass)
 		{
@@ -28,7 +65,7 @@ namespace MVCBlog.WebApp.Controllers
 			{
 				Session["Username"] = username;
 
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index", "Admin");
 			}
 			else
 			{

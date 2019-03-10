@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BlogDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdmins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblText">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adminId" Type="int" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblAdmins_tblText">
+          <End Role="tblText" Type="Self.tblText" Multiplicity="1" />
+          <End Role="tblAdmins" Type="Self.tblAdmins" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblText">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblAdmins">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCategories_tblText">
+          <End Role="tblText" Type="Self.tblText" Multiplicity="1" />
+          <End Role="tblCategories" Type="Self.tblCategories" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblText">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblCategories">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStatus_tblAdmins">
+          <End Role="tblAdmins" Type="Self.tblAdmins" Multiplicity="1" />
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdmins">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblStatus">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BlogDBModelStoreContainer">
+          <EntitySet Name="tblAdmins" EntityType="Self.tblAdmins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCategories" EntityType="Self.tblCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStatus" EntityType="Self.tblStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblText" EntityType="Self.tblText" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblAdmins_tblText" Association="Self.FK_tblAdmins_tblText">
+            <End Role="tblText" EntitySet="tblText" />
+            <End Role="tblAdmins" EntitySet="tblAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCategories_tblText" Association="Self.FK_tblCategories_tblText">
+            <End Role="tblText" EntitySet="tblText" />
+            <End Role="tblCategories" EntitySet="tblCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStatus_tblAdmins" Association="Self.FK_tblStatus_tblAdmins">
+            <End Role="tblAdmins" EntitySet="tblAdmins" />
+            <End Role="tblStatus" EntitySet="tblStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BlogDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAdmins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblText" Relationship="Self.FK_tblAdmins_tblText" FromRole="tblAdmins" ToRole="tblText" />
+          <NavigationProperty Name="tblStatus" Relationship="Self.FK_tblStatus_tblAdmins" FromRole="tblAdmins" ToRole="tblStatus" />
+        </EntityType>
+        <EntityType Name="tblCategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblText" Relationship="Self.FK_tblCategories_tblText" FromRole="tblCategories" ToRole="tblText" />
+        </EntityType>
+        <EntityType Name="tblStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblAdmins" Relationship="Self.FK_tblStatus_tblAdmins" FromRole="tblStatus" ToRole="tblAdmins" />
+        </EntityType>
+        <EntityType Name="tblText">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adminId" Type="Int32" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblAdmins" Relationship="Self.FK_tblAdmins_tblText" FromRole="tblText" ToRole="tblAdmins" />
+          <NavigationProperty Name="tblCategories" Relationship="Self.FK_tblCategories_tblText" FromRole="tblText" ToRole="tblCategories" />
+        </EntityType>
+        <Association Name="FK_tblAdmins_tblText">
+          <End Role="tblText" Type="Self.tblText" Multiplicity="1" />
+          <End Role="tblAdmins" Type="Self.tblAdmins" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblText">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblAdmins">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStatus_tblAdmins">
+          <End Role="tblAdmins" Type="Self.tblAdmins" Multiplicity="1" />
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdmins">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblStatus">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCategories_tblText">
+          <End Role="tblText" Type="Self.tblText" Multiplicity="1" />
+          <End Role="tblCategories" Type="Self.tblCategories" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblText">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblCategories">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BlogDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdmins" EntityType="Self.tblAdmins" />
+          <EntitySet Name="tblCategories" EntityType="Self.tblCategories" />
+          <EntitySet Name="tblStatus" EntityType="Self.tblStatus" />
+          <EntitySet Name="tblText" EntityType="Self.tblText" />
+          <AssociationSet Name="FK_tblAdmins_tblText" Association="Self.FK_tblAdmins_tblText">
+            <End Role="tblText" EntitySet="tblText" />
+            <End Role="tblAdmins" EntitySet="tblAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStatus_tblAdmins" Association="Self.FK_tblStatus_tblAdmins">
+            <End Role="tblAdmins" EntitySet="tblAdmins" />
+            <End Role="tblStatus" EntitySet="tblStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCategories_tblText" Association="Self.FK_tblCategories_tblText">
+            <End Role="tblText" EntitySet="tblText" />
+            <End Role="tblCategories" EntitySet="tblCategories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlogDBModelStoreContainer" CdmEntityContainer="BlogDBContext">
+          <EntitySetMapping Name="tblAdmins">
+            <EntityTypeMapping TypeName="BlogDBModel.tblAdmins">
+              <MappingFragment StoreEntitySet="tblAdmins">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCategories">
+            <EntityTypeMapping TypeName="BlogDBModel.tblCategories">
+              <MappingFragment StoreEntitySet="tblCategories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStatus">
+            <EntityTypeMapping TypeName="BlogDBModel.tblStatus">
+              <MappingFragment StoreEntitySet="tblStatus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblText">
+            <EntityTypeMapping TypeName="BlogDBModel.tblText">
+              <MappingFragment StoreEntitySet="tblText">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
