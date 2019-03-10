@@ -13,10 +13,10 @@ namespace MVCBlog.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BlogDBContext : DbContext
+    public partial class BlogDBContexts : DbContext
     {
-        public BlogDBContext()
-            : base("name=BlogDBContext")
+        public BlogDBContexts()
+            : base("name=BlogDBContexts")
         {
         }
     

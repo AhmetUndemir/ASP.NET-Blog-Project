@@ -1,4 +1,5 @@
 ﻿using MVCBlog.DAL;
+using MVCBlog.WebApp.ModelView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace MVCBlog.WebApp.Controllers
 		[HttpPost]
 		public ActionResult AdminAdd(string name, string username, string password, int status)
 		{
-			using BlogDBContext ctx = new BlogDBContext())
+			using (BlogDBContexts ctx = new BlogDBContexts())
 			{
 				tblAdmins adminInfo = new tblAdmins();
 
@@ -37,7 +38,6 @@ namespace MVCBlog.WebApp.Controllers
 
 				if (isAdmin == null)
 				{
-					adminInfo.id = status;
 					adminInfo.name = name;
 					adminInfo.username = username;
 					adminInfo.password = password;
@@ -55,6 +55,19 @@ namespace MVCBlog.WebApp.Controllers
 			}
 
 			return View();
+		}
+
+
+		public ActionResult AdminList()
+		{
+			AdminListModel model = new AdminListModel();
+			using (BlogDBContexts db = new BlogDBContexts())
+			{
+				//Çekilen verileri ToList() metoduyla List'e dönüştürdük.
+				model.admins = db.tblAdmins.ToList();
+			}
+			return View(model);
+			
 		}
 
 		[HttpPost]

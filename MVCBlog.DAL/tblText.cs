@@ -17,10 +17,7 @@ namespace MVCBlog.DAL
         public int id { get; set; }
         public string title { get; set; }
         public string description { get; set; }
-        public int adminId { get; set; }
-        public int categoryId { get; set; }
-    
-        public virtual tblAdmins tblAdmins { get; set; }
-        public virtual tblCategories tblCategories { get; set; }
+        public string adminId { get; set; }
+        public string categoryId { get; set; }
     }
 }

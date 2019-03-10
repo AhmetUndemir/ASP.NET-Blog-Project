@@ -50,62 +50,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvcBlog.Context.cs">
+    <Compile Include="MVCBlog.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MvcBlog.Context.tt</DependentUpon>
+      <DependentUpon>MVCBlog.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="MvcBlog.cs">
+    <Compile Include="MVCBlog.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MvcBlog.tt</DependentUpon>
+      <DependentUpon>MVCBlog.tt</DependentUpon>
     </Compile>
-    <Compile Include="MvcBlog.Designer.cs">
+    <Compile Include="MVCBlog.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MvcBlog.edmx</DependentUpon>
+      <DependentUpon>MVCBlog.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tblAdmins.cs">
-      <DependentUpon>MvcBlog.tt</DependentUpon>
+      <DependentUpon>MVCBlog.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCategories.cs">
-      <DependentUpon>MvcBlog.tt</DependentUpon>
+      <DependentUpon>MVCBlog.tt</DependentUpon>
     </Compile>
     <Compile Include="tblStatus.cs">
-      <DependentUpon>MvcBlog.tt</DependentUpon>
+      <DependentUpon>MVCBlog.tt</DependentUpon>
     </Compile>
     <Compile Include="tblText.cs">
-      <DependentUpon>MvcBlog.tt</DependentUpon>
+      <DependentUpon>MVCBlog.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="MvcBlog.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MvcBlog.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="MvcBlog.edmx.diagram">
-      <DependentUpon>MvcBlog.edmx</DependentUpon>
+    <EntityDeploy Include="MVCBlog.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MVCBlog.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MVCBlog.edmx.diagram">
+      <DependentUpon>MVCBlog.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MvcBlog.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MvcBlog.Context.cs</LastGenOutput>
-      <DependentUpon>MvcBlog.edmx</DependentUpon>
-    </Content>
-    <Content Include="MvcBlog.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MvcBlog.edmx</DependentUpon>
-      <LastGenOutput>MvcBlog.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="MVCBlog.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MVCBlog.edmx</DependentUpon>
+      <LastGenOutput>MVCBlog.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MVCBlog.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MVCBlog.edmx</DependentUpon>
+      <LastGenOutput>MVCBlog.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

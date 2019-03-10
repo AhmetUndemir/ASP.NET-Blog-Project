@@ -16,7 +16,5 @@ namespace MVCBlog.DAL
     {
         public int id { get; set; }
         public string name { get; set; }
-    
-        public virtual tblAdmins tblAdmins { get; set; }
     }
 }
